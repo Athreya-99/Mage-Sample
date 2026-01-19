@@ -1,0 +1,27 @@
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+import requests
+def load_data(*args, **kwargs):
+    import requests
+import time
+
+@data_exporter
+def export_data(data, *args, **kwargs):
+    url = "http://localhost:6789/api/pipeline_schedules/9/pipeline_runs/023dee97f0214f8d892a37b087ccc472"
+    payload = {
+        "pipeline_run": {
+            "variables": {
+                "key1": "20",
+                "key2": "400000"
+    }
+  }
+}
+    response = requests.post(url, json=payload)
+
+    time.sleep(20)
+
+    return response
+
+
+
+

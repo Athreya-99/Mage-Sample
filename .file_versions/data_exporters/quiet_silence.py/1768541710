@@ -1,0 +1,27 @@
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+import os
+from mage_ai.data_preparation.shared.secrets import get_secret_value
+from sqlalchemy import create_engine
+import pymssql
+
+@data_exporter
+def export_data(data, *args, **kwargs):
+    
+    password = get_secret_value('SQLSERVER_PASSWORD')
+    engine = create_engine(
+    "mssql+pymssql://sa:5tgb%TGB5tgb@sqlserver-demo:1433/kratos"
+    )
+
+    data.to_sql(
+        "sample_table",
+        engine,
+        if_exists="replace",
+        index=False
+    )
+    print(password)
+
+    
+
+

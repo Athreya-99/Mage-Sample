@@ -1,0 +1,14 @@
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+from mage_ai.orchestration.triggers.api import trigger_pipeline
+
+@data_exporter
+def trigger_pipeline2(data, *args, **kwargs):
+    trigger_pipeline(
+        pipeline_uuid="bright_crystal",
+        variables={"target_table": "sample_tab"key1": 20, "key2": 30000}
+    )
+
+    # Specify your data exporting logic here
+
+

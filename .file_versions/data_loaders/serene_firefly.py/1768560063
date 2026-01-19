@@ -1,0 +1,22 @@
+if 'data_loader' not in globals():
+    from mage_ai.data_preparation.decorators import data_loader
+if 'test' not in globals():
+    from mage_ai.data_preparation.decorators import test
+
+
+@data_loader
+def load_data(*args, **kwargs):
+    import requests
+import time
+
+@data_loader
+def trigger_pipeline(*args, **kwargs):
+    pipeline_runs= 
+    
+    response = requests.post(url, json=payload)
+
+    time.sleep(20)
+
+    return response
+
+

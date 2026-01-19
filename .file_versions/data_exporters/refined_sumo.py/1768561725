@@ -1,0 +1,15 @@
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+
+@data_exporter
+def trigger_pipeline1(data, *args, **kwargs):
+    info = {"key1": 20, "key2": 30000}
+    trigger_pipeline(
+        pipeline_uuid="brigh",
+        variables=run_info
+    )
+
+    # Specify your data exporting logic here
+
+

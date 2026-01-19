@@ -1,0 +1,32 @@
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+
+@data_exporter
+def export_data(data, *args, **kwargs):
+    import pymssql
+    from sqlalchemy import create_engine
+
+    # SQL Server connection details
+    USER = "sa"
+    PASSWORD = "5tgb%TGB5tgb"
+    SERVER = "sqlserver"   # Docker container name
+    DATABASE = "kratos"
+
+    # Create SQLAlchemy engine
+    engine = create_engine(
+        f"mssql+pymssql://{USER}:{PASSWORD}@{SERVER}/{DATABASE}"
+    )
+
+    # Optional: test connection
+    with engine.connect() as conn:
+        result = conn.execute("SELECT @@VERSION")
+        print(result.fetchone())
+
+    # Export DataFrame to SQL Server
+    data.to_sql(
+        name="sample_table",
+        con=engine,
+        if_exists="replace",   # or "append"
+        index=False
+    )
