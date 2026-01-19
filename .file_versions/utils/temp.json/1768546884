@@ -1,0 +1,8 @@
+{
+    "pipeline_run":{
+        "variables":{
+            "tablename":"blah_blah",
+            "run_type":"daily"
+        }
+    }
+}

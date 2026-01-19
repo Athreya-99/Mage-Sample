@@ -1,0 +1,30 @@
+if 'transformer' not in globals():
+    from mage_ai.data_preparation.decorators import transformer
+if 'test' not in globals():
+    from mage_ai.data_preparation.decorators import test
+from sqlalchemy import create_engine, text
+
+@transformer
+def transform(data, *args, **kwargs):
+    data.to_sql(
+        "sample_table",
+        engine,
+        if_exists="append",
+        index=False
+    )
+    with engine.connect() as conn:
+    conn.execute(
+        text("UPDATE sample_table SET column1 = employeeid WHERE id = :id"),
+        {"val": "new_value", "id": 123}
+    )
+    conn.commit()
+
+    return data
+
+
+@test
+def test_output(output, *args) -> None:
+    """
+    Template code for testing the output of the block.
+    """
+    assert output is not None, 'The output is undefined'
